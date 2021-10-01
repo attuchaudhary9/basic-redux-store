@@ -3,7 +3,10 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { selectedProducts,removeSelectedProduct } from "../redux/actions/productAction";
+import {
+  selectedProducts,
+  removeSelectedProduct,
+} from "../redux/actions/productAction";
 const ProductDetails = () => {
   const { productId } = useParams();
   //fetch product details from redux store
@@ -22,38 +25,39 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (productId && productId !== "") fetchSingleProduct();
-    return(
-        dispatch(removeSelectedProduct())
-    )
+    return () => {dispatch(removeSelectedProduct());}
   }, [productId]);
   return (
-    <div
-      className=" ui raised very padded text container segment"
-      style={{ marginTop: "5rem" }}
-    >
+    <div className=" ui segment" style={{ margin: "5rem" }}>
       {Object.keys(product).length === 0 ? (
         <h2>Loading...</h2>
       ) : (
-        <>
-          {" "}
-          <div className="ui centered medium image">
-            <img src={image} alt={title} />
-          </div>
-          <div className="content">
-            <span className="header">{title}</span>
-            <div className="meta">
-              <span className="date">{price}</span>
+        <div className="ui two column very relaxed grid">
+          <div className="column">
+            <div className="ui medium image">
+              <img src={image} alt={title} />
             </div>
-            <div className="description">{description}</div>
           </div>
-          <div className="extra content">
-            <span>
-              <i className="user icon"></i>
-              {category}
-            </span>
-          </div>{" "}
-        </>
+         
+          <div className="column">
+            <div className="content">
+              <span className="header">{title}</span>
+              <div className="meta">
+                <span className="date">{price}</span>
+              </div>
+              <div className="description">{description}</div>
+            </div>
+            <div className="extra content">
+              <span>
+                <i className="user icon"></i>
+                {category}
+              </span>
+            </div>
+            <button className="positive ui button">Add To cart</button>
+          </div>
+        </div>
       )}
+      <div class="ui vertical divider">and</div>
     </div>
   );
 };

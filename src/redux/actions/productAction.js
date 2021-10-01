@@ -15,4 +15,8 @@ export const selectedProducts = (product)=>{
     }
 }
 
-//TODO:remove selectedProducts
+export const removeSelectedProduct = ()=>{
+    return {
+        type:ActionTypes.REMOVE_SELECTED_PRODUCT
+    }
+}
